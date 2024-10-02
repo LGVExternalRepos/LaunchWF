@@ -17,6 +17,17 @@ jobs:
     steps:
       - name: Trigger Workflow in Another Repository
         run: |
+
+          declare -a Repos=("element1" \ 
+                          "element2" \
+                          "element3")
+
+          for i in "${Repos[@]}"
+          do
+           echo "$i"
+          done
+          exit 1
+          
           # Set the required variables
           repo_owner="LGVExternalRepos" 
           repo_name="graylog2-server"  
