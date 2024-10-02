@@ -59,6 +59,8 @@ jobs:
 
           echo BB64_FILE_SCAN=$(cat ${{ env.FILE_SCAN }} | base64 -w 0) >> $GITHUB_ENV
           echo SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha')  >> $GITHUB_ENV
+          curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha'
+          exit 1
           echo ${{ env.SHA_FILE_SCAN }}
           if [ "${{ env.SHA_FILE_SCAN }}" == "null" ]; then
               echo "NO EXISTE "
