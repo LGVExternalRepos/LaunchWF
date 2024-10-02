@@ -19,6 +19,7 @@ on:
 
 env:
   BB64: "hola"
+  SHA256: "hola"
   
 jobs:
   trigger:
@@ -37,7 +38,7 @@ jobs:
           echo BB64=$(cat kk.txt | base64 -w 0) >> $GITHUB_ENV
           #echo SHA256=$(sha256sum kk.txt | head -c 64) >> $GITHUB_ENV
           #sha256sum kk.txt | head -c 64
-          echo SHA256=$(shasum < "kk.txt" | awk '{print $1}') >> $GITHUB_ENV
+          echo SHA256=$(shasum < "kk3.txt" | awk '{print $1}') >> $GITHUB_ENV
           
           
           
