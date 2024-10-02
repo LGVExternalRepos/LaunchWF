@@ -26,8 +26,7 @@ env:
   FILE_UPLOAD: "DownloadAndRun.yml"
   BB64_FILE_UPLOAD: "BB64_FILE_UPLOAD"
   SHA_FILE_UPLOAD: "SHA_FILE_UPLOAD"
-  REPO_LIST: ("develop" \
-  "main")
+  REPO_LIST: ("develop" "main")
   
 jobs:
   trigger:
