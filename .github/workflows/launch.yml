@@ -18,14 +18,14 @@ on:
         required: true
 
 env:
-  BB64: "hola"
-  SHA256: "hola"
+  BB64: "BB64"
+  SHA256: "SHA256"
   FILE_SCAN: "xygeni-labdev-tuneado.yml"
-  BB64_FILE_SCAN: "hola"
-  SHA_FILE_SCAN: "hola"
+  BB64_FILE_SCAN: "BB64_FILE_SCAN"
+  SHA_FILE_SCAN: "SHA_FILE_SCAN"
   FILE_UPLOAD: "DownloadAndrun.yml"
-  BB64_FILE_UPLOAD: "hola"
-  SHA_FILE_UPLOAD: "hola"
+  BB64_FILE_UPLOAD: "BB64_FILE_UPLOAD"
+  SHA_FILE_UPLOAD: "SHA_FILE_UPLOAD"
   
 jobs:
   trigger:
