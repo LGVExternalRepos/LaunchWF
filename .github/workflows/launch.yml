@@ -65,6 +65,14 @@ jobs:
           else
               echo "EXISTE "
           fi
+          RET=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha')
+          RET=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }}kk | jq -r '.sha')
+          echo $RET
+          if [ "$RET" == "null" ]; then
+              echo "NO EXISTE "
+          else
+              echo "EXISTE "
+          fi
           exit 1
           
           
