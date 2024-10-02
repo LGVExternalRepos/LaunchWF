@@ -38,9 +38,10 @@ jobs:
           echo BB64=$(cat kk.txt | base64 -w 0) >> $GITHUB_ENV
           #echo SHA256=$(sha256sum kk.txt | head -c 64) >> $GITHUB_ENV
           #sha256sum kk.txt | head -c 64
-          echo SHA256=$(shasum < "kk3.txt" | awk '{print $1}') >> $GITHUB_ENV
-          curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/kk3.txt
-          exit 1
+          #echo SHA256=$(shasum < "kk3.txt" | awk '{print $1}') >> $GITHUB_ENV
+          #curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/kk3.txt
+          echo SHA256=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/kk3.txt | jq '.sha') >> $GITHUB_ENV
+          
           
           
           
