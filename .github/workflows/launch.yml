@@ -70,8 +70,6 @@ jobs:
                   -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.garcia@xygeni.io"},"content":"${{ env.BB64_FILE_SCAN }}"}'
           else
               echo "EXISTE "
-              if [ "$RET" == "null" ]; then
-              echo "NO EXISTE "
               curl -L \
                 -X PUT \
                 -H "Accept: application/vnd.github+json" \
