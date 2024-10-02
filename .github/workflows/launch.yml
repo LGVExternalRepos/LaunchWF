@@ -93,7 +93,7 @@ jobs:
         
       - name: Trigger Workflow in Another Repository
         run: |
-          return 1
+          exit 1
           declare -a Repos=(\
           "Mindustry" \
           "graylog2-server" \
