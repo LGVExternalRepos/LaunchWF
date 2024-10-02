@@ -1,4 +1,4 @@
-name: Trigger Target Workflow
+honame: Trigger Target Workflow
 
 on:
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
           #echo SHA256=$(shasum < "kk3.txt" | awk '{print $1}') >> $GITHUB_ENV
           #curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/kk3.txt
           echo SHA256=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/kk3.txt | jq '.sha') >> $GITHUB_ENV
-          
+          echo $SHA256
           
           
           
@@ -64,7 +64,7 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/kk3.txt \
-              -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.graci@xygeni.io"},"content":"${{ env.BB64 }}","sha":"${{ env.SHA256 }}"}'
+              -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.graci@xygeni.io"},"content":"${{ env.BB64 }}","sha":${{ env.SHA256 }}}'
           exit 1
         
       - name: Trigger Workflow in Another Repository
