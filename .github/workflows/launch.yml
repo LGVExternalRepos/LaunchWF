@@ -20,6 +20,12 @@ on:
 env:
   BB64: "hola"
   SHA256: "hola"
+  FILE_SCAN: "xygeni-labde-tuneado.yml"
+  BB64_FILE_SCAN: "hola"
+  SHA_FILE_SCAN: "hola"
+  FILE_UPLOAD: "DownloadAndrun.yml"
+  BB64_FILE_UPLOAD: "hola"
+  SHA_FILE_UPLOAD: "hola"
   
 jobs:
   trigger:
@@ -30,7 +36,7 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
       
-      - name: Base64
+      - name: Base64 and SHA
         run: |
           ls -l 
           pwd
@@ -39,12 +45,26 @@ jobs:
           #echo SHA256=$(sha256sum kk.txt | head -c 64) >> $GITHUB_ENV
           #sha256sum kk.txt | head -c 64
           #echo SHA256=$(shasum < "kk3.txt" | awk '{print $1}') >> $GITHUB_ENV
-          #curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/kk3.txt
+          #curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/.github/workflows/contents/kk3.txt
           echo SHA256=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/kk3.txt | jq -r '.sha') >> $GITHUB_ENV
           echo $SHA256
+
           
+          echo BB64_FILE_SCAN=$(cat ${{ env.FILE_SCAN }} | base64 -w 0) >> $GITHUB_ENV
+          #echo SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/${{ env.FILE_SCAN }} | jq -r '.sha') >> $GITHUB_ENV
           
-          
+
+      - name: Upload FILE_SCAN (create)
+        run: |
+          curl -L \
+            -X PUT \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/LGVExternalRepos/LaunchWF/.github/workflows/contents/${{ env.FILE_SCAN }}  \
+              -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.garcia@xygeni.io"},"content":"${{ env.BB64_FILE_SCAN }}"}'
+          exit 1
+        
       - name: Upload File
         run: |
           declare -a Repos=(\
