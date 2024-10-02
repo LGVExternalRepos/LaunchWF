@@ -95,7 +95,7 @@ jobs:
       - name: Trigger Workflow in Another Repository
         run: |
          
-          declare -a KK=(${{ env.BB64_FILE_UPLOAD }})
+          declare -a KK=(${{ env.REPO_LIST }})
           for i in "${KK[@]}"
           do
            echo "$i"
