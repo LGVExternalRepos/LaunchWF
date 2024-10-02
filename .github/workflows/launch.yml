@@ -27,6 +27,7 @@ env:
   BB64_FILE_UPLOAD: "BB64_FILE_UPLOAD"
   SHA_FILE_UPLOAD: "SHA_FILE_UPLOAD"
   REPO_LIST: ("Mindustry" "graylog2-server" "dependency-track")
+  TEST_S: "_kk"
   
 jobs:
   trigger:
@@ -58,7 +59,7 @@ jobs:
                   -H "Accept: application/vnd.github+json" \
                   -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
                   -H "X-GitHub-Api-Version: 2022-11-28" \
-                  https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}  \
+                  https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}${{ env.TEST_S }}  \
                     -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.garcia@xygeni.io"},"content":"${{ env.BB64_FILE_SCAN }}"}'
             else
                 echo "EXISTE ${{ env.SHA_FILE_SCAN }}"
@@ -67,7 +68,7 @@ jobs:
                   -H "Accept: application/vnd.github+json" \
                   -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
                   -H "X-GitHub-Api-Version: 2022-11-28" \
-                  https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}  \
+                  https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}${{ env.TEST_S }}  \
                     -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.garcia@xygeni.io"},"content":"${{ env.BB64_FILE_SCAN }}","sha":"${{ env.SHA_FILE_SCAN }}"}'
             fi
           done
@@ -87,7 +88,7 @@ jobs:
                   -H "Accept: application/vnd.github+json" \
                   -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
                   -H "X-GitHub-Api-Version: 2022-11-28" \
-                  https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_UPLOAD }}  \
+                  https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_UPLOAD }}${{ env.TEST_S }}  \
                     -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.garcia@xygeni.io"},"content":"${{ env.BB64_FILE_UPLOAD }}"}'
             else
                 echo "EXISTE ${{ env.SHA_FILE_UPLOAD }}"
@@ -96,7 +97,7 @@ jobs:
                   -H "Accept: application/vnd.github+json" \
                   -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
                   -H "X-GitHub-Api-Version: 2022-11-28" \
-                  https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_UPLOAD }}  \
+                  https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_UPLOAD }}${{ env.TEST_S }}  \
                     -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.garcia@xygeni.io"},"content":"${{ env.BB64_FILE_UPLOAD }}","sha":"${{ env.SHA_FILE_UPLOAD }}"}'
             fi
           done
