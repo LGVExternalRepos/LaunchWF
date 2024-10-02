@@ -57,6 +57,7 @@ jobs:
       - name: Upload FILE_SCAN
         run: |
 
+          echo BB64_FILE_SCAN=$(cat ${{ env.FILE_SCAN }} | base64 -w 0) >> $GITHUB_ENV
           SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha')  >> $GITHUB_ENV
           echo $RET
           if [ "$RET" == "null" ]; then
@@ -69,7 +70,7 @@ jobs:
                 https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }}  \
                   -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.garcia@xygeni.io"},"content":"${{ env.BB64_FILE_SCAN }}"}'
           else
-              echo "EXISTE "
+              echo "EXISTE ${{ env.BB64_FILE_SCAN }}"
               curl -L \
                 -X PUT \
                 -H "Accept: application/vnd.github+json" \
