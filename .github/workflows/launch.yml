@@ -57,9 +57,16 @@ jobs:
       - name: Upload FILE_SCAN (create)
         run: |
 
-          curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }}kk | jq -r '.sha'
-          curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha'
+          RET=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }}kk | jq -r '.sha')
+          RET=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha')
+          echo $RET
+          if [ "$RET" == "null" ]; then
+              echo "NO EXISTE "
+          else
+              echo "EXISTE "
+          fi
           exit 1
+          
           
           curl -L \
             -X PUT \
