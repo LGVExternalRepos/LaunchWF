@@ -62,7 +62,6 @@ jobs:
           #echo SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha')  >> $GITHUB_ENV
           curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha'
           echo SHA_FILE_SCAN ${{ env.SHA_FILE_SCAN }}
-          exit 1
           
           if [ "${{ env.SHA_FILE_SCAN }}" == "null" ]; then
               echo "NO EXISTE "
