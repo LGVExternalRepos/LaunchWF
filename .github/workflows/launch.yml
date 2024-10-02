@@ -21,7 +21,7 @@ jobs:
           repo_owner="LGVExternalRepos" 
           repo_name="graylog2-server"  
           event_type="trigger-workflow" 
-          service=${{ github.event.inputs.target_service }}"
+          service="${{ github.event.inputs.target_service }}"
           version="${{ github.event.inputs.target_version }}"
   
           curl -L \
