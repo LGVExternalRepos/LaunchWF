@@ -1,4 +1,4 @@
-honame: Trigger Target Workflow
+name: Trigger Target Workflow
 
 on:
   workflow_dispatch:
