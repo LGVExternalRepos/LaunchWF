@@ -23,7 +23,7 @@ env:
   FILE_SCAN: "xygeni-labdev-tuneado.yml"
   BB64_FILE_SCAN: "BB64_FILE_SCAN"
   SHA_FILE_SCAN: "SHA_FILE_SCAN"
-  FILE_UPLOAD: "DownloadAndrun.yml"
+  FILE_UPLOAD: "DownloadAndRun.yml"
   BB64_FILE_UPLOAD: "BB64_FILE_UPLOAD"
   SHA_FILE_UPLOAD: "SHA_FILE_UPLOAD"
   
