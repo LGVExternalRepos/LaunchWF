@@ -52,13 +52,14 @@ jobs:
           
           echo BB64_FILE_SCAN=$(cat ${{ env.FILE_SCAN }} | base64 -w 0) >> $GITHUB_ENV
           #echo SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }}kk | jq -r '.sha') >> $GITHUB_ENV
+          echo SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha')  >> $GITHUB_ENV
           
 
       - name: Upload FILE_SCAN
         run: |
 
           echo BB64_FILE_SCAN=$(cat ${{ env.FILE_SCAN }} | base64 -w 0) >> $GITHUB_ENV
-          echo SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha')  >> $GITHUB_ENV
+          #echo SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha')  >> $GITHUB_ENV
           curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha'
           echo SHA_FILE_SCAN ${{ env.SHA_FILE_SCAN }}
           exit 1
