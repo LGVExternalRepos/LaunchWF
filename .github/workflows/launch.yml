@@ -36,7 +36,7 @@ jobs:
           POPO=$(cat kk.txt | base64 -w 0)
           echo BB64=$(cat kk.txt | base64 -w 0) >> $GITHUB_ENV
           echo SHA256=$(sha256sum kk3.txt) >> $GITHUB_ENV
-          echo $SHA256
+          sha256sum kk3.txt
           
       - name: Upload File
         run: |
