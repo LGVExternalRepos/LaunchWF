@@ -20,7 +20,7 @@ on:
 env:
   BB64: "hola"
   SHA256: "hola"
-  FILE_SCAN: "xygeni-labde-tuneado.yml"
+  FILE_SCAN: "xygeni-labdev-tuneado.yml"
   BB64_FILE_SCAN: "hola"
   SHA_FILE_SCAN: "hola"
   FILE_UPLOAD: "DownloadAndrun.yml"
