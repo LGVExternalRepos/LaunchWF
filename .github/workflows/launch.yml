@@ -9,6 +9,13 @@ on:
       target_version:
         description: 'Input a version (e.g., v1.0.0)'
         required: true
+      action:
+          type: choice
+          description: Action
+          options: 
+          - Scan
+          - Upload
+          default: Scan
 
 jobs:
   trigger:
@@ -27,6 +34,8 @@ jobs:
           event_type="trigger-workflow" 
           service="${{ github.event.inputs.target_service }}"
           version="${{ github.event.inputs.target_version }}"
+          action="${{ github.event.inputs.action }}"
+          event_type="${{ github.event.inputs.action }}"
           
           for i in "${Repos[@]}"
           do
