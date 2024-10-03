@@ -16,6 +16,12 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
 
+      - name: Set Xygeni env 
+        run: |
+            echo xy_url ${{ github.event.client_payload.xy_url }}"
+            echo xy_token ${{ github.event.client_payload.xy_token }}"
+            exit 1
+
       - name: Xygeni-Scanner
         uses: xygeni/xygeni-action@v3.2.0
         id: Xygeni-Scanner
