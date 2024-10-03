@@ -126,6 +126,7 @@ jobs:
                     echo "NO EXISTE "
                     menosd="'{\"message\":\"my commit message\",\"committer\":{\"name\":\"LGV\",\"email\":\"luis.garcia@xygeni.io\"},\"content\":\"$BB64_FILE_SCAN\"}'"
                     echo $menosd > temp.json
+                    cat temp.json
 
                     echo curl -L \
                       -X PUT \
