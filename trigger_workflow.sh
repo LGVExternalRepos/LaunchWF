@@ -36,9 +36,9 @@ event_type=$5
                 echo repo : $repo
 
 
-                repo_owner="LGVExternalRepos" 
-                loops="${{ github.event.inputs.loops }}"
-                event_type="${{ github.event.inputs.action }}"
+                #repo_owner="LGVExternalRepos" 
+                #loops="${{ github.event.inputs.loops }}"
+                #event_type="${{ github.event.inputs.action }}"
           
                     curl -L \
                     -X POST \
