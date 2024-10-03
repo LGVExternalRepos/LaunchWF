@@ -65,7 +65,7 @@ jobs:
             DEMO_LGVTRIAL)
               echo "DEMO_LGVTRIAL"
               echo XY_TOKEN=${{ secrets.XYGENI_TOKEN_DEMO_LGVTRIAL }} >> $GITHUB_ENV
-              #echo XY_URL=${{ secrets.XYGENI_URL_DEMO }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XYGENI_URL_DEMO }} >> $GITHUB_ENV
               ;;
             *)
               echo "DEFAULT (DEMO_LGVTRIAL)"
