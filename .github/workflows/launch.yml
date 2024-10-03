@@ -125,7 +125,7 @@ jobs:
                 if [ "$SHA_FILE_SCAN" == "null" ]; then
                     echo "NO EXISTE "
                     menosd="'{\"message\":\"my commit message\",\"committer\":{\"name\":\"LGV\",\"email\":\"luis.garcia@xygeni.io\"},\"content\":\"$BB64_FILE_SCAN\"}'"
-                    echo $menosd
+                    echo $menosd > temp.json
 
                     echo curl -L \
                       -X PUT \
@@ -140,7 +140,7 @@ jobs:
                       -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
                       -H "X-GitHub-Api-Version: 2022-11-28" \
                       https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}${{ env.TEST_S }}  \
-                        -d @kk.json
+                        -d @temp.json
                       
                       #  -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.garcia@xygeni.io"},"content":"$BB64_FILE_SCAN"}'
 
