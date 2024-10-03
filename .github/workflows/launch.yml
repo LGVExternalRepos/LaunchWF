@@ -11,7 +11,7 @@ on:
           - DEMO_LGVTRIAL
           - PRO_LGV
           - PRO_LGVTRIAL
-          default: PRO_LGVTRIAL
+          default: DEMO_LGVTRIAL
       action:
           type: choice
           description: Action
