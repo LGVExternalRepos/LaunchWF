@@ -117,6 +117,7 @@ jobs:
 
                 #BB64_FILE_SCAN="$(cat ${{ env.FILE_SCAN }} | base64 -w 0)"
 
+                chmod +x ./copy_to_repo.sh
                 ./copy_to_repo.sh "$repo" "${{ env.FILE_SCAN }}" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ env.TEST_S }}"
                 exit 1
 
