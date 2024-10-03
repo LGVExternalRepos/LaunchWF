@@ -77,11 +77,11 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
-                $REPO_URL/forks \
-              -d '{"organization":"LGVExternalRepos","name":"$repo","default_branch_only":true}'
+                https://github.com/latiotech/insecure-kubernetes-deployments/forks \
+              -d '{"organization":"LGVExternalRepos","name":"insecure-kubernetes-deployments","default_branch_only":true}'
             
             exit 1
-            
+
 
       - name: Base64 and SHA
         run: |  
