@@ -49,4 +49,4 @@ event_type=$7
                     -H "Authorization: Bearer ${PAT_FOR_XYGENI_SCAN}" \
                     -H "X-GitHub-Api-Version: 2022-11-28" \
                     https://api.github.com/repos/$repo_owner/$repo/dispatches \
-                    -d "{\"event_type\": \"$event_type\", \"client_payload\": { \"xy_token\": \"$PAT_FOR_XYGENI_SCAN\", \"xy_url\": \"$XY_URL\", \"loops\": \"$loops\" }}"
+                    -d "{\"event_type\": \"$event_type\", \"client_payload\": { \"xy_token\": \"$XY_TOKEN\", \"xy_url\": \"$XY_URL\", \"loops\": \"$loops\" }}"
