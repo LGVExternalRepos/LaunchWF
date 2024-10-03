@@ -3,9 +3,10 @@
 line=$1
 repo_owner=$2
 PAT_FOR_XYGENI_SCAN=$3
-XY_URL=$4
-loops=$5
-event_type=$6
+XY_TOKEN=$4
+XY_URL=$5
+loops=$6
+event_type=$7
 
                 
                 
