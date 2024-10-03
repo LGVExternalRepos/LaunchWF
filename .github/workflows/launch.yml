@@ -124,7 +124,7 @@ jobs:
           
                 if [ "$SHA_FILE_SCAN" == "null" ]; then
                     echo "NO EXISTE "
-                    menosd="{\"message\":\"my commit message\",\"committer\":{\"name\":\"LGV\",\"email\":\"luis.garcia@xygeni.io\"},\"content\":\"${BB64_FILE_SCAN}\"}"
+                    menosd="{\"message\":\"my commit message\",\"committer\":{\"name\":\"LGV\",\"email\":\"luis.garcia@xygeni.io\"},\"content\":\"$BB64_FILE_SCAN\"}"
                     echo $menosd
                     exit 1
 
