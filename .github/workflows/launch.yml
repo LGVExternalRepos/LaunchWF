@@ -115,7 +115,7 @@ jobs:
               echo Triggering Workflow for $line
               repo_owner="LGVExternalRepos" 
               chmod +x ./trigger_workflow.sh
-              ./trigger_workflow.sh "$line" "$repo_owner" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ github.event.inputs.loops }}" ${{ github.event.inputs.action }}"
+              ./trigger_workflow.sh "$line" "$repo_owner" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ github.event.inputs.loops }}" "${{ github.event.inputs.action }}"
                   
           done
     
