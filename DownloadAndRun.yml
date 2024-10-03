@@ -33,7 +33,7 @@ jobs:
           name: archive-bin
           
              
-      - name: Uploading reports .. reports/LGVExternalRepos/deps.Mindustry
+      - name: Uploading reports .. 
         run: |
           echo Executing Xygeni scan ....  
           echo ${{ github.event.repository.name }}
