@@ -7,9 +7,11 @@ on:
           type: choice
           description: Xygeni environment
           options: 
-          - demo
-          - pro
-          default: demo
+          - DEMO_LGV
+          - DEMO_LGVTRIAL
+          - PRO_LGV
+          - PRO_LGVTRIAL
+          default: PRO_LGVTRIAL
       action:
           type: choice
           description: Action
@@ -30,6 +32,7 @@ env:
   FILE_UPLOAD: "DownloadAndRun.yml"
   TEST_S: ""
   REPO_LIST: ("Mindustry" "graylog2-server" "dependency-track")
+  XY_ENV: ${{ github.event.inputs.xy_env }}
 
   
 jobs:
@@ -41,6 +44,38 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
       
+      - name: Set Xygeni env 
+        run: |
+            case "$XY_ENV" in 
+            PRO_LGV)
+              echo "PRO_LGV"
+              echo XY_TOKEN=${{ secrets.XY_TOKEN_PROLGV }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XY_URL_PRO }} >> $GITHUB_ENV
+              ;;
+            PRO_LGVTRIAL)
+              echo "PRO_LGVTRIAL"
+              echo XY_TOKEN=${{ secrets.XY_TOKEN_PRO_LGVTRIAL }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XY_URL_PRO }} >> $GITHUB_ENV
+              ;;
+            DEMO_LGV)
+              echo "DEMO_LGV"
+              echo XY_TOKEN=${{ secrets.XY_TOKEN_DEMO_LGV }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XY_URL_DEMO }} >> $GITHUB_ENV
+              ;;
+            DEMO_LGVTRIAL)
+              echo "DEMO_LGVTRIAL"
+              echo XY_TOKEN=${{ secrets.XY_TOKEN_DEMO_LGVTRIAL }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XY_URL_DEMO }} >> $GITHUB_ENV
+              ;;
+            *)
+              echo "DEFAULT (DEMO_LGVTRIAL)"
+              echo XY_TOKEN=${{ secrets.XY_TOKEN_DEMO_LGVTRIAL }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XY_URL_DEMO }} >> $GITHUB_ENV
+              ;;
+            esac
+            
+
+
       - name: Create fork
         run: | 
         
@@ -112,18 +147,19 @@ jobs:
                 done
             
         
-        
       - name: Trigger Workflow in Another Repository
         run: |
-         
-          readarray repolist < repos.txt
-          for line in "${repolist[@]}"
-          do
-              echo Triggering Workflow for $line
-              repo_owner="LGVExternalRepos" 
-              chmod +x ./trigger_workflow.sh
-              ./trigger_workflow.sh "$line" "$repo_owner" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ github.event.inputs.loops }}" "${{ github.event.inputs.action }}"
-                  
-          done
+
+            readarray repolist < repos.txt
+            for line in "${repolist[@]}"
+            do
+                echo Triggering Workflow for $line
+                repo_owner="LGVExternalRepos" 
+                chmod +x ./trigger_workflow.sh
+                #./trigger_workflow.sh "$line" "$repo_owner" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ github.event.inputs.loops }}" "${{ github.event.inputs.action }}"
+                ./trigger_workflow.sh "$line" "$repo_owner" "$XY_TOKEN" "$XY_URL" "${{ github.event.inputs.loops }}" "${{ github.event.inputs.action }}"
+                    
+            done
+      
     
 

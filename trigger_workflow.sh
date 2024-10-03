@@ -3,8 +3,9 @@
 line=$1
 repo_owner=$2
 PAT_FOR_XYGENI_SCAN=$3
-loops=$4
-event_type=$5
+XY_URL=$4
+loops=$5
+event_type=$6
 
                 
                 
@@ -46,4 +47,4 @@ event_type=$5
                     -H "Authorization: Bearer ${PAT_FOR_XYGENI_SCAN}" \
                     -H "X-GitHub-Api-Version: 2022-11-28" \
                     https://api.github.com/repos/$repo_owner/$repo/dispatches \
-                    -d "{\"event_type\": \"$event_type\", \"client_payload\": {\"loops\": \"$loops\" }}"
+                    -d "{\"event_type\": \"$event_type\", \"client_payload\": { \"xy_token\": \"$PAT_FOR_XYGENI_SCAN\", \"xy_url\": \"$XY_URL\", \"loops\": \"$loops\" }}"

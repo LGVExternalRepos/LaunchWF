@@ -20,8 +20,8 @@ jobs:
         uses: xygeni/xygeni-action@v3.2.0
         id: Xygeni-Scanner
         with:
-          xygeni_url: https://apidemo.xygeni.io/deps-doctor-service
-          token: ${{ secrets.XYGENI_TOKEN }}
+          xygeni_url: ${{ github.event.client_payload.xy_url }}"
+          token: ${{ github.event.client_payload.xy_token }}"
           gh_token: ${{ secrets.PAT_FOR_XYGENI_SCAN }}
           command: scan --help
 
