@@ -123,7 +123,7 @@ jobs:
           
                 if [ "$SHA_FILE_SCAN" == "null" ]; then
                     echo "NO EXISTE "
-                    curl -L \
+                    echo curl -L \
                       -X PUT \
                       -H "Accept: application/vnd.github+json" \
                       -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
