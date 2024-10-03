@@ -120,6 +120,8 @@ jobs:
                 chmod +x ./copy_to_repo.sh
                 ./copy_to_repo.sh "$repo" "${{ env.FILE_SCAN }}" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ env.TEST_S }}"
                 exit 1
+                
+                
 
                 SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}${{ env.TEST_S }} | jq -r '.sha')
 
