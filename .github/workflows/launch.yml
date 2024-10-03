@@ -88,11 +88,36 @@ jobs:
             for line in "${repolist[@]}"
             do
                 echo Uploading Scan file for $line
-                repo=$line
+                REPO_URL=$line
+                # extract the protocol
+                proto="$(echo $REPO_URL | grep :// | sed -e's,^\(.*://\).*,\1,g')"
+                echo proto : $proto
+                # remove the protocol
+                url="$(echo ${REPO_URL/$proto/})"
+                echo url : $url
+                # extract the user (if any)
+                user="$(echo $url | grep @ | cut -d@ -f1)"
+                echo user : $user
+                # extract the host and port
+                hostport="$(echo ${url/$user@/} | cut -d/ -f1)"
+                echo hostport : $hostport
+                # by request host without port
+                host="$(echo $hostport | sed -e 's,:.*,,g')"
+                echo host : $host
+                # by request - try to extract the port
+                port="$(echo $hostport | sed -e 's,^.*:,:,g' -e 's,.*:\([0-9]*\).*,\1,g' -e 's,[^0-9],,g')"
+                echo port : $port
+                # extract the path (if any)
+                path="$(echo $url | grep / | cut -d/ -f2-)"
+                echo path : $path
+                org="$(echo $path | grep / | cut -d/ -f1)"
+                echo org : $org
+                repo="$(echo $path | grep / | cut -d/ -f2-)"
+                echo repo : $repo
 
                 echo BB64_FILE_SCAN=$(cat ${{ env.FILE_SCAN }} | base64 -w 0)
                 echo SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha')
-                echo BB64_FILE_UPLOAD=$(cat ${{ env.FILE_UPLOAD }} | base64 -w 0) >> $GITHUB_ENV
+                echo BB64_FILE_UPLOAD=$(cat ${{ env.FILE_UPLOAD }} | base64 -w 0)
                 echo SHA_FILE_UPLOAD=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_UPLOAD }} | jq -r '.sha')
           
                 if [ "$SHA_FILE_SCAN" == "null" ]; then
@@ -102,7 +127,7 @@ jobs:
                       -H "Accept: application/vnd.github+json" \
                       -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
                       -H "X-GitHub-Api-Version: 2022-11-28" \
-                      https://api.github.com/repos/LGVExternalRepos/${repo}/contents/.github/workflows/${{ env.FILE_SCAN }}${{ env.TEST_S }}  \
+                      https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}${{ env.TEST_S }}  \
                         -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.garcia@xygeni.io"},"content":"$BB64_FILE_SCAN"}'
                 else
                     echo "EXISTE $SHA_FILE_SCAN"
@@ -111,7 +136,7 @@ jobs:
                       -H "Accept: application/vnd.github+json" \
                       -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
                       -H "X-GitHub-Api-Version: 2022-11-28" \
-                      https://api.github.com/repos/LGVExternalRepos/${repo}/contents/.github/workflows/${{ env.FILE_SCAN }}${{ env.TEST_S }}  \
+                      https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}${{ env.TEST_S }}  \
                         -d '{"message":"my commit message","committer":{"name":"LGV","email":"luis.garcia@xygeni.io"},"content":"BB64_FILE_SCAN","sha":"$SHA_FILE_SCAN"}'
                 fi
               
