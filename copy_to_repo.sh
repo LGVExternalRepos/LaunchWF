@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#repo=$1
 line=$1
 FILE_TO_COPY=$2
 PAT_FOR_XYGENI_SCAN=$3
