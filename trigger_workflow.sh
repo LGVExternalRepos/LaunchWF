@@ -43,7 +43,7 @@ event_type=$5
                     curl -L \
                     -X POST \
                     -H "Accept: application/vnd.github+json" \
-                    -H "Authorization: Bearer ${{ secrets.GH_PAT }}" \
+                    -H "Authorization: Bearer ${PAT_FOR_XYGENI_SCAN}" \
                     -H "X-GitHub-Api-Version: 2022-11-28" \
                     https://api.github.com/repos/$repo_owner/$repo/dispatches \
                     -d "{\"event_type\": \"$event_type\", \"client_payload\": {\"loops\": \"$loops\" }}"
