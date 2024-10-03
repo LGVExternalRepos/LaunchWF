@@ -30,7 +30,7 @@ jobs:
           xygeni_url: "${{ github.event.client_payload.xy_url }}"
           token: "${{ github.event.client_payload.xy_token }}"
           gh_token: ${{ secrets.PAT_FOR_XYGENI_SCAN }}
-          command: scan --never-fail --include-collaborators --no-upload -f json -o reports/${{ github.repository }} -n ${{ github.repository }}
+          command: scan --never-fail --include-collaborators  -f json -o reports/${{ github.repository }} -n ${{ github.repository }}
 
       - name: Archive building artifacts
         uses: actions/upload-artifact@v3
