@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Set Xygeni env 
         run: |
-            echo xy_url ${{ github.event.client_payload.xy_url }}"
+            echo xy_url "${{ github.event.client_payload.xy_url }}"
  
 
       - uses: actions/checkout@v3
