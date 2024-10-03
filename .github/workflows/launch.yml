@@ -49,29 +49,28 @@ jobs:
             case "$XY_ENV" in 
             PRO_LGV)
               echo "PRO_LGV"
-              echo XY_TOKEN=${{ secrets.XY_TOKEN_PROLGV }} >> $GITHUB_ENV
-              echo XY_URL=${{ secrets.XY_URL_PRO }} >> $GITHUB_ENV
+              echo XY_TOKEN=${{ secrets.XYGENI_TOKEN_PROLGV }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XYGENI_URL_PRO }} >> $GITHUB_ENV
               ;;
             PRO_LGVTRIAL)
               echo "PRO_LGVTRIAL"
-              echo XY_TOKEN=${{ secrets.XY_TOKEN_PRO_LGVTRIAL }} >> $GITHUB_ENV
-              echo XY_URL=${{ secrets.XY_URL_PRO }} >> $GITHUB_ENV
+              echo XY_TOKEN=${{ secrets.XYGENI_TOKEN_PRO_LGVTRIAL }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XYGENI_URL_PRO }} >> $GITHUB_ENV
               ;;
             DEMO_LGV)
               echo "DEMO_LGV"
-              echo XY_TOKEN=${{ secrets.XY_TOKEN_DEMO_LGV }} >> $GITHUB_ENV
-              echo XY_URL=${{ secrets.XY_URL_DEMO }} >> $GITHUB_ENV
+              echo XY_TOKEN=${{ secrets.XYGENI_TOKEN_DEMO_LGV }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XYGENI_URL_DEMO }} >> $GITHUB_ENV
               ;;
             DEMO_LGVTRIAL)
               echo "DEMO_LGVTRIAL"
-              echo XY_TOKEN=${{ secrets.XY_TOKEN_DEMO_LGVTRIAL }} >> $GITHUB_ENV
-              #echo XY_URL=${{ secrets.XY_URL_DEMO }} >> $GITHUB_ENV
-              echo XY_URL=kaka >> $GITHUB_ENV
+              echo XY_TOKEN=${{ secrets.XYGENI_TOKEN_DEMO_LGVTRIAL }} >> $GITHUB_ENV
+              #echo XY_URL=${{ secrets.XYGENI_URL_DEMO }} >> $GITHUB_ENV
               ;;
             *)
               echo "DEFAULT (DEMO_LGVTRIAL)"
-              echo XY_TOKEN=${{ secrets.XY_TOKEN_DEMO_LGVTRIAL }} >> $GITHUB_ENV
-              echo XY_URL=${{ secrets.XY_URL_DEMO }} >> $GITHUB_ENV
+              echo XY_TOKEN=${{ secrets.XYGENI_TOKEN_DEMO_LGVTRIAL }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XYGENI_URL_DEMO }} >> $GITHUB_ENV
               ;;
             esac
             
@@ -159,7 +158,6 @@ jobs:
                 chmod +x ./trigger_workflow.sh
                 echo secrets.XY_URL_DEMO ${{ secrets.XY_URL_DEMO }} 
                 echo XY_URL "$XY_URL"
-                exit 1
                 #./trigger_workflow.sh "$line" "$repo_owner" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ github.event.inputs.loops }}" "${{ github.event.inputs.action }}"
                 ./trigger_workflow.sh "$line" "$repo_owner" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "$XY_TOKEN" "$XY_URL" "${{ github.event.inputs.loops }}" "${{ github.event.inputs.action }}"
                     
