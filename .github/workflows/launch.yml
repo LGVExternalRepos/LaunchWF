@@ -87,12 +87,11 @@ jobs:
             readarray repolist < repos.txt
             for line in "${repolist[@]}"
             do
-
+                echo Copying Scan file for $line
                 chmod +x ./copy_to_repo.sh
                 ./copy_to_repo.sh "$line" "${{ env.FILE_SCAN }}" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ env.TEST_S }}"
               
             done
-            exit 1
 
 
 
@@ -103,6 +102,13 @@ jobs:
                 for line in "${repolist[@]}"
                 do
                     echo Copying Upload file for $line
+
+                    chmod +x ./copy_to_repo.sh
+                    ./copy_to_repo.sh "$line" "${{ env.FILE_UPLOAD }}" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ env.TEST_S }}"
+                    exit 1
+
+                    
+
                     REPO_URL=$line
                     # extract the protocol
                     proto="$(echo $REPO_URL | grep :// | sed -e's,^\(.*://\).*,\1,g')"
