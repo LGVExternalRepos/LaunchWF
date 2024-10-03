@@ -116,9 +116,9 @@ jobs:
                 echo repo : $repo
 
                 echo BB64_FILE_SCAN="$(cat ${{ env.FILE_SCAN }} | base64 -w 0)"
-                curl https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}
+                curl https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}${{ env.TEST_S }}
                 exit 1
-                echo SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }} | jq -r '.sha')
+                echo SHA_FILE_SCAN=$(curl https://api.github.com/repos/LGVExternalRepos/$repo/contents/.github/workflows/${{ env.FILE_SCAN }}${{ env.TEST_S }} | jq -r '.sha')
                 #echo BB64_FILE_UPLOAD=$(cat ${{ env.FILE_UPLOAD }} | base64 -w 0)
                 #echo SHA_FILE_UPLOAD=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_UPLOAD }} | jq -r '.sha')
           
