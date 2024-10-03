@@ -38,6 +38,51 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
       
+      - name: Create fork
+        run: | 
+        
+        
+            REPO_URL=https://github.com/latiotech/insecure-kubernetes-deployments
+
+            # extract the protocol
+            proto="$(echo $REPO_URL | grep :// | sed -e's,^\(.*://\).*,\1,g')"
+            echo proto : $proto
+            # remove the protocol
+            url="$(echo ${REPO_URL/$proto/})"
+            echo url : $url
+            # extract the user (if any)
+            user="$(echo $url | grep @ | cut -d@ -f1)"
+            echo user : $user
+            # extract the host and port
+            hostport="$(echo ${url/$user@/} | cut -d/ -f1)"
+            echo hostport : $hostport
+            # by request host without port
+            host="$(echo $hostport | sed -e 's,:.*,,g')"
+            echo host : $host
+            # by request - try to extract the port
+            port="$(echo $hostport | sed -e 's,^.*:,:,g' -e 's,.*:\([0-9]*\).*,\1,g' -e 's,[^0-9],,g')"
+            echo port : $port
+            # extract the path (if any)
+            path="$(echo $url | grep / | cut -d/ -f2-)"
+            echo path : $path
+            org="$(echo $path | grep / | cut -d/ -f1)"
+            echo org : $org
+            repo="$(echo $path | grep / | cut -d/ -f2-)"
+            echo repo : $repo
+
+
+
+            curl -L \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.PAT_FOR_XYGENI_SCAN }}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+                $REPO_URL/forks \
+              -d '{"organization":"LGVExternalRepos","name":"$repo","default_branch_only":true}'
+            
+            exit 1
+            
+
       - name: Base64 and SHA
         run: |  
           echo BB64_FILE_SCAN=$(cat ${{ env.FILE_SCAN }} | base64 -w 0) >> $GITHUB_ENV
