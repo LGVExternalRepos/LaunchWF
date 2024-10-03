@@ -122,11 +122,32 @@ jobs:
                 #echo BB64_FILE_UPLOAD=$(cat ${{ env.FILE_UPLOAD }} | base64 -w 0)
                 #echo SHA_FILE_UPLOAD=$(curl https://api.github.com/repos/LGVExternalRepos/LaunchWF/contents/.github/workflows/${{ env.FILE_UPLOAD }} | jq -r '.sha')
           
+                filename=${{ env.FILE_SCAN }}
+                base64=$(base64 "${filename}" --wrap 0)
+                destination=temp.json
+
+                # Generating a JSON string (https://stackoverflow.com/a/48470227)
+                json_string=$(
+                  jq --null-input \
+                    --arg message "my msg" \
+                    --arg name "LGV" \
+                    --arg email "luis.garcia@xygeni.io" \
+                    --arg base64 "${base64}" \
+                    --arg filename "${filename}" \
+                    '{message: $message, commiter: {name: $name, email: $email }, content: $base64 }'
+                )
+
+                # Creating the JSON file
+                echo $json_string > "${destination}"
+                cat $destination
+
+
+
                 if [ "$SHA_FILE_SCAN" == "null" ]; then
                     echo "NO EXISTE "
                     menosd="'{\"message\":\"my commit message\",\"committer\":{\"name\":\"LGV\",\"email\":\"luis.garcia@xygeni.io\"},\"content\":\"$BB64_FILE_SCAN\"}'"
-                    echo $menosd > temp.json
-                    cat temp.json
+                    #echo $menosd > temp.json
+                    #cat temp.json
 
                     echo curl -L \
                       -X PUT \
