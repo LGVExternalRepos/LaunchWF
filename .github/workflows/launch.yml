@@ -103,8 +103,7 @@ jobs:
                     ./copy_to_repo.sh "$line" "${{ env.FILE_UPLOAD }}" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ env.TEST_S }}"
                   
                 done
-    
-                exit 1          
+            
         
         
       - name: Trigger Workflow in Another Repository
