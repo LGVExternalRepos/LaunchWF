@@ -41,7 +41,13 @@ jobs:
       - name: Create fork
         run: | 
         
-        
+            readarray myarray < repos.txt
+            for repo in "${myarray[@]}"
+            do
+              echo $repo
+            done
+            exit 1
+
             REPO_URL=https://github.com/latiotech/insecure-kubernetes-deployments
 
             # extract the protocol
