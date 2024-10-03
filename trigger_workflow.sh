@@ -42,6 +42,7 @@ event_type=$7
                 #loops="${{ github.event.inputs.loops }}"
                 #event_type="${{ github.event.inputs.action }}"
           
+                    echo XY_URL "$XY_URL"
                     curl -L \
                     -X POST \
                     -H "Accept: application/vnd.github+json" \

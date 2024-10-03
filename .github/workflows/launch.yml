@@ -157,7 +157,6 @@ jobs:
                 repo_owner="LGVExternalRepos" 
                 chmod +x ./trigger_workflow.sh
                 echo XY_URL "$XY_URL"
-                exit 1
                 #./trigger_workflow.sh "$line" "$repo_owner" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "${{ github.event.inputs.loops }}" "${{ github.event.inputs.action }}"
                 ./trigger_workflow.sh "$line" "$repo_owner" "${{ secrets.PAT_FOR_XYGENI_SCAN }}" "$XY_TOKEN" "$XY_URL" "${{ github.event.inputs.loops }}" "${{ github.event.inputs.action }}"
                     
