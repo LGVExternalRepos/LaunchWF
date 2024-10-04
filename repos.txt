@@ -1,1 +1,1 @@
-https://github.com/Marvin-SSC/DemoProject
+https://github.com/WebGoat/WebGoat
