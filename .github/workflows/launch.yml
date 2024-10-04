@@ -77,6 +77,7 @@ jobs:
 
 
       - name: Create fork
+        if: ${{ github.event.inputs.action }} == "pepe"
         run: | 
         
             readarray repolist < repos.txt
@@ -121,7 +122,7 @@ jobs:
             
       - name: Copying Scan file
         run: | 
-            
+            exit 1
             readarray repolist < repos.txt
             for line in "${repolist[@]}"
             do
