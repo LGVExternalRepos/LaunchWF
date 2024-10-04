@@ -156,7 +156,7 @@ jobs:
       - name: Trigger Workflow in Another Repository
         if: ${{ (github.event.inputs.action  == 'Scan') || (github.event.inputs.action  == 'Upload') }} 
         run: |
-            exit 1
+
             readarray repolist < repos.txt
             for line in "${repolist[@]}"
             do
