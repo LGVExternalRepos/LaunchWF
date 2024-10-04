@@ -20,7 +20,7 @@ on:
           - InjectPipelines       
           - Scan
           - Upload
-          default: InjectPipelines
+          default: Scan
       loops:
         description: 'Number of uploads'
         default: "3"
