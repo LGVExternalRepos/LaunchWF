@@ -18,6 +18,7 @@ on:
           options: 
           - Scan
           - Upload
+          - Fork
           default: Scan
       loops:
         description: 'Number of uploads'
@@ -77,10 +78,8 @@ jobs:
 
 
       - name: Create fork
-        if: ${{ github.event.inputs.action  == 'pepe' }} 
+        #if: ${{ github.event.inputs.action  == 'Fork' }} 
         run: | 
-            echo ${{ github.event.inputs.action }}
-            exit 1
 
             readarray repolist < repos.txt
             for line in "${repolist[@]}"
@@ -124,7 +123,7 @@ jobs:
             
       - name: Copying Scan file
         run: | 
-            exit 1
+
             readarray repolist < repos.txt
             for line in "${repolist[@]}"
             do
@@ -152,7 +151,7 @@ jobs:
         
       - name: Trigger Workflow in Another Repository
         run: |
-
+            exit 1
             readarray repolist < repos.txt
             for line in "${repolist[@]}"
             do
