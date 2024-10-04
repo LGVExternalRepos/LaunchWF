@@ -16,10 +16,11 @@ on:
           type: choice
           description: Action
           options: 
+          - Fork   
+          - InjectPipelines       
           - Scan
           - Upload
-          - Fork
-          default: Scan
+          default: InjectPipelines
       loops:
         description: 'Number of uploads'
         default: "3"
@@ -80,6 +81,7 @@ jobs:
       - name: Create fork
         if: ${{ github.event.inputs.action  == 'Fork' }} 
         run: | 
+            echo EL FORK ESTA MAL !!!!!
             exit 1
             readarray repolist < repos.txt
             for line in "${repolist[@]}"
@@ -122,6 +124,7 @@ jobs:
             done
             
       - name: Copying Scan file
+        if: ${{ github.event.inputs.action  == 'InjectPipelines' }} 
         run: | 
 
             readarray repolist < repos.txt
@@ -136,6 +139,7 @@ jobs:
 
 
       - name: Copying Upload file
+        if: ${{ github.event.inputs.action  == 'InjectPipelines' }} 
         run: | 
                 
                 readarray repolist < repos.txt
@@ -150,6 +154,7 @@ jobs:
             
         
       - name: Trigger Workflow in Another Repository
+        if: ${{ (github.event.inputs.action  == 'Scan') || (github.event.inputs.action  == 'Upload') }} 
         run: |
             exit 1
             readarray repolist < repos.txt
