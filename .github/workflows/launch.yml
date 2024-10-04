@@ -79,9 +79,9 @@ jobs:
       - name: Create fork
         if: ${{ github.event.inputs.action }} == "pepe"
         run: | 
-            echo sdlfjlsdjflsjfldsjflsd
+            echo ${{ github.event.inputs.action }}
             exit 1
-            
+
             readarray repolist < repos.txt
             for line in "${repolist[@]}"
             do
