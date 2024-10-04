@@ -9,6 +9,7 @@ on:
           options: 
           - DEMO_LGV
           - DEMO_LGVTRIAL
+          - DEMO_MARVIN
           - PRO_LGV
           - PRO_LGVTRIAL
           default: DEMO_LGVTRIAL
@@ -67,6 +68,11 @@ jobs:
             DEMO_LGVTRIAL)
               echo "DEMO_LGVTRIAL"
               echo XY_TOKEN=${{ secrets.XYGENI_TOKEN_DEMO_LGVTRIAL }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XYGENI_URL_DEMO }} >> $GITHUB_ENV
+              ;;
+            DEMO_MARVIN)
+              echo "DEMO_MARVIN"
+              echo XY_TOKEN=${{ secrets.XYGENI_TOKEN_DEMO_MARVIN }} >> $GITHUB_ENV
               echo XY_URL=${{ secrets.XYGENI_URL_DEMO }} >> $GITHUB_ENV
               ;;
             *)
